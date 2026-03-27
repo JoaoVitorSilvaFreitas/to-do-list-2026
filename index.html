@@ -6,26 +6,65 @@
     <title>To-do list</title>
     <link rel="stylesheet" href="/styles.css">
     <link rel="stylesheet" href="/reset.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet"/>
     <script src="script.js" defer></script>
 </head>
 
 <body>
-    <section class="container_tarefa">
+    <!--HEADER-->
+    <header class="header">
+        <nav class="container_nav">
+            <div class="container_conteudoNav">
+                <a href="#" class="nav_logo">
+                    <i class="ri-cloud-line"></i>
+                </a>
+
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="container_tarefa">
         <div class="container_conteudo-tarefa">
             <div class="container_adcTarefa">
                 <input class="input_adcTarefa" placeholder="O que desejo fazer?">
-                <button class="btn_adcTarefa">Adicionar</button>
-                <img class="img_trash" src="./img/trash.png" alt="finalizar tarefa">
+                <button class="btn_adcTarefa">Adicionar</button>               
+                <!-- <img class="img_trash" src="./img/trash.png" alt="finalizar tarefa"> -->
             </div>
         </div>
     </section>
+    <!-- LISTA QUE EXIBE AS TAREFAS-->
     <section class="container_lista-tarefa">
         <div class="container_counteudo-lista">
             <ul class="coluna_lista-tarefa">
             </ul>
         </div>
     </section>
+    </main>
+
+    <footer>
+
+    </footer>
+    
 </body>
 </html>
 
 
+        <!-- ESTRUTURA DO DROPDOWN CONTAINER-->
+         <!--
+                <div class="dropdown_container">
+                    <button class="dropdown_btnAbreLista">
+                        <i class="ri-delete-bin-3-line"></i>
+                    </button>
+                    <ul class="dropdown_container-listaRemocao">
+                        <li>
+                            <button class="dropdown_btnRemoveTarefa">
+                                Apagar completo
+                            </button>
+                            <button class="dropdown_btnRemoveTarefa">
+                                Apagar todos
+                            </button>
+                        </li>
+                    </ul>
+                </div>   
+        -->

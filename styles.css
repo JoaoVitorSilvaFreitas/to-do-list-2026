@@ -26,6 +26,11 @@ body {
     width: 100vw;
 }
 
+.container_tarefa {
+    display: flex;
+    justify-content: center;
+}
+
 .container_conteudo-tarefa{
     margin-top: 25px;
     display: flex;
@@ -45,9 +50,9 @@ body {
     border-radius: 20px;
     border: none;
     outline: none;
-    box-shadow: 0px 14px 26px -10px rgba(0,0,0,0.75);
-    -webkit-box-shadow: 0px 14px 26px -10px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 14px 26px -10px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.08);
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.08);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.08);
 }
 
 .btn_adcTarefa {
@@ -57,9 +62,9 @@ body {
     border-radius: 40px;
     border: none;
     padding: 13px;
-    box-shadow: 0px 14px 26px -10px rgba(0,0,0,0.75);
-    -webkit-box-shadow: 0px 14px 26px -10px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 14px 26px -10px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.08);
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.08);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.08);
 }
 
 .btn_adcTarefa:hover {
@@ -75,9 +80,17 @@ body {
 .img_trash {
     height: 45px;
     margin-left: 20px;
-    box-shadow: 0px 14px 26px -10px rgba(0,0,0,0.75);
-    -webkit-box-shadow: 0px 14px 26px -10px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 14px 26px -10px rgba(0,0,0,0.75);
+    filter: drop-shadow(10px 10px 5px rgba(0,0,0,0.25));
+    -webkit-filter: drop-shadow 10px 10px 5px  rgba(0,0,0,0.32);
+    -moz-filter: drop-shadow 10px 10px 5px  rgba(0,0,0,0.32);
+}
+
+.img_trash:hover {
+    transform: scale(1.05);
+}
+
+.img_trash:active {
+    transform: scale(0.95);
 }
 
 .container_lista-tarefa {
@@ -99,9 +112,9 @@ body {
     border:none ;
     border-radius: 20px;
     margin-bottom: 15px;
-    box-shadow: 0px 14px 26px -10px rgba(0,0,0,0.75);
-    -webkit-box-shadow: 0px 14px 26px -10px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 14px 26px -10px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.08);
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.08);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.08);
     cursor: pointer;
 }
 
@@ -109,10 +122,13 @@ body {
     height: 25px;
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
+    pointer-events: none;
 }
 
-.linha_lista-tarefa:hover, .img_check, .img_edit{
+.linha_lista-tarefa:hover .img_check,
+.linha_lista-tarefa:hover .img_edit {
     opacity: 1;
+    pointer-events: auto;
 }
 
 .txt_lista {
@@ -125,6 +141,7 @@ body {
     background-color: #a0e419;
     text-decoration: line-through;
 }
+
 
 @media (min-width:720px) and (max-width:1024px){
     body {

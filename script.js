@@ -1,6 +1,7 @@
 //declaração das constantes do projeto.
 const formAdcTarefa = document.querySelector('.input_adcTarefa')
 const btnAdcTarefa = document.querySelector('.btn_adcTarefa')
+const img_trash = document.querySelector('.img_trash')
 const listaCompleta = document.querySelector('.coluna_lista-tarefa')
 const txt_listaTarefa = document.querySelector('.txt_lista-tarefa')
 
@@ -42,10 +43,14 @@ function deletarItem(posicao){
     mostrarTarefa()
 }
 
+function deletarConcluida(posicao){
+    
+}
+
 function deletarTudo (posicao){
+    // Aqui ele adiciona uma lista com o valor zerado a minha lista.
     minhaLista = []
     mostrarTarefa()
-
 }
     /* Sempre que executar alguma adição ou deletar tem que exibir a função mostrar tarefa 
     pois ela sempre irá sobreescrever com o novo resultado o que for pedido.*/
@@ -89,5 +94,6 @@ function recarregarTarefas(){
 }
 
 recarregarTarefas()
-btnAdcTarefa.addEventListener('click', adicionarNovaTarefa);
+btnAdcTarefa.addEventListener('click', adicionarNovaTarefa)
+img_trash.addEventListener('click', deletarTudo)
 

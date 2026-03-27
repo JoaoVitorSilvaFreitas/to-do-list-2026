@@ -1,27 +1,38 @@
 //declaração das constantes do projeto.
-const formAdcTarefa = document.querySelector('.input_adcTarefa');
-const btnAdcTarefa = document.querySelector('.btn_adcTarefa');
-const listaCompleta = document.querySelector('.coluna_lista-tarefa');
-const txt_listaTarefa = document.querySelector('.txt_lista-tarefa');
+const formAdcTarefa = document.querySelector('.input_adcTarefa')
+const btnAdcTarefa = document.querySelector('.btn_adcTarefa')
+const listaCompleta = document.querySelector('.coluna_lista-tarefa')
+const txt_listaTarefa = document.querySelector('.txt_lista-tarefa')
 
 let minhaLista = []
     //Adiciona a nova tarefa
 function adicionarNovaTarefa() {
-   // minhaLista.push(formAdcTarefa.value)
+    const checkLetras = formAdcTarefa.value
+    const quantidadeLetras = checkLetras.length 
 
-   // aqui ele cria uma tarefa e também seleciona um status adicionando as chaves após o push.
-   minhaLista.push({
-    tarefa: formAdcTarefa.value,
-    concluida: false
+        //Verifica caso o campo de adição de tarefas está vazio.
+    if(formAdcTarefa.value === ''){
+        alert('O campo de tarefas está vazio.')
+    }else if(minhaLista.length >= 15){
+        //Verifica se a lista tem mais de 15 itens, se houver não adiciona mais tarefas.
+        alert('Não é possivel adicionar mais tarefas, conclua alguma das tarefas acima.')
+    }else if(quantidadeLetras > 35){
+        alert('Sua tarefa é muito grande, consegue explicar em menos palavras?')
+    }else{
+        // aqui ele cria uma tarefa e também seleciona um status adicionando as chaves após o push.
+        minhaLista.push({
+            tarefa: formAdcTarefa.value,
+            concluida: false
    })
-
+    
     mostrarTarefa()
+    }
 }
 
 function concluirTarefa(posicao){
     minhaLista[posicao].concluida = !minhaLista[posicao].concluida
 
-    mostrarTarefa();
+    mostrarTarefa()
 }
 
 function deletarItem(posicao){
@@ -31,14 +42,20 @@ function deletarItem(posicao){
     mostrarTarefa()
 }
 
+function deletarTudo (posicao){
+    minhaLista = []
+    mostrarTarefa()
 
-
+}
+    /* Sempre que executar alguma adição ou deletar tem que exibir a função mostrar tarefa 
+    pois ela sempre irá sobreescrever com o novo resultado o que for pedido.*/
 function mostrarTarefa() {
     // Adiciona uma nova linha dentro da lista
     let novaLi = ''
     //o forEach percorre todos os itens do array
     //item também é conhecido como index. serve para localizar a posição do item dentro do vetor
-    minhaLista.forEach((item, posicao) => {
+    if(Array.isArray(minhaLista) && minhaLista.length >= 0){
+        minhaLista.forEach((item, posicao) => {
 
         novaLi = novaLi + `
         <li class="linha_lista-tarefa ${item.concluida && "done"}">
@@ -48,12 +65,16 @@ function mostrarTarefa() {
         </li>
         `
     })
-
+    }else{
+        console.error("A lista está vazia")
+    }
+    
+    //A lista irá receber o valor passado pelo usuario 
     listaCompleta.innerHTML = novaLi
-
+    // O local storage vai converter o item para string para poder ser incluido na lista
     localStorage.setItem('lista', JSON.stringify(minhaLista))
-
-    /**/
+    // Após as estapas acima, vai incluir um campo vazio para o usuário inserir uma nova tarefa
+    formAdcTarefa.value = ''
 }
 
 function recarregarTarefas(){

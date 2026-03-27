@@ -16,14 +16,31 @@
         <nav class="container_nav">
             <div class="container_conteudoNav">
                 <a href="#" class="nav_logo">
-                    <i class="ri-cloud-line"></i>
+                    <i class="ri-cloud-line"></i> NuvemTarefas
                 </a>
-
+                <div class="nav_toogle">
+                    <i class="ri-delete-bin-3-line nav_burger"></i>
+                </div>
+            </div>
+            <!--========== Menu Nav ==========-->
+            <div class="dropdown_container">
+                    <ul class="dropdown_container-listaRemocao">
+                        <li>
+                            <button class="dropdown_btnRemoveTarefa" id="dropdown_removeCompleto">
+                                Apagar completo
+                            </button>
+                            <button class="dropdown_btnRemoveTarefa" id="dropdown_removeTodos">
+                                Apagar todos
+                            </button>
+                        </li>
+                    </ul>
+                </div>   
             </div>
         </nav>
     </header>
 
-    <main>
+    <!-- MAIN -->
+    <main class="main">
         <section class="container_tarefa">
         <div class="container_conteudo-tarefa">
             <div class="container_adcTarefa">
@@ -48,23 +65,3 @@
     
 </body>
 </html>
-
-
-        <!-- ESTRUTURA DO DROPDOWN CONTAINER-->
-         <!--
-                <div class="dropdown_container">
-                    <button class="dropdown_btnAbreLista">
-                        <i class="ri-delete-bin-3-line"></i>
-                    </button>
-                    <ul class="dropdown_container-listaRemocao">
-                        <li>
-                            <button class="dropdown_btnRemoveTarefa">
-                                Apagar completo
-                            </button>
-                            <button class="dropdown_btnRemoveTarefa">
-                                Apagar todos
-                            </button>
-                        </li>
-                    </ul>
-                </div>   
-        -->

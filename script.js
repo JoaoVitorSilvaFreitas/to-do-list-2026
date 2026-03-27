@@ -2,10 +2,32 @@
 const formAdcTarefa = document.querySelector('.input_adcTarefa')
 const btnAdcTarefa = document.querySelector('.btn_adcTarefa')
 const img_trash = document.querySelector('.img_trash')
+const btn_removeCompleto = document.querySelector('#dropdown_removeCompleto')
+const btn_removeTodas = document.querySelector('#dropdown_removeTodos')
 const listaCompleta = document.querySelector('.coluna_lista-tarefa')
 const txt_listaTarefa = document.querySelector('.txt_lista-tarefa')
-
+//Declaração dropdown
+const navToggle = document.querySelector('.nav_toogle')
+const dropdown = document.querySelector('.dropdown_container')
+const burger = document.querySelector('.nav_burger')
+const close = document.querySelector('.nav_close')
+//declaração da lista variavel
 let minhaLista = []
+
+    //Configurações do dropdown
+    // Isso assume que você quer esconder um e mostrar o outro
+    // Se estiver usando ícones sobrepostos, pode alternar a opacidade
+    navToggle.addEventListener('click', () => {
+    dropdown.classList.toggle('show-dropdown');
+    });
+
+    // Fechar ao clicar fora do menu
+    document.addEventListener('click', (e) => {
+        if (!navToggle.contains(e.target) && !dropdown.contains(e.target)) {
+        dropdown.classList.remove('show-dropdown');
+        }
+    });
+
     //Adiciona a nova tarefa
 function adicionarNovaTarefa() {
     const checkLetras = formAdcTarefa.value
@@ -35,7 +57,7 @@ function concluirTarefa(posicao){
 
     mostrarTarefa()
 }
-
+    //Deleta o item escolhido.
 function deletarItem(posicao){
     //splice permite que eu delete qualquer coisa dentro do array com 2 parametros. qual posição, e quantos itens a partir da posição selecionada
     minhaLista.splice(posicao, 1)
@@ -89,11 +111,13 @@ function recarregarTarefas(){
     if(tarefaDoLocalStorage){
     //minha lista recebe os valores convertidos novamente com o .parse .
         minhaLista = JSON.parse(tarefaDoLocalStorage)
-        console.log(tarefaDoLocalStorage)
+        //console.log(tarefaDoLocalStorage)
     }    
 }
 
 recarregarTarefas()
+
 btnAdcTarefa.addEventListener('click', adicionarNovaTarefa)
-img_trash.addEventListener('click', deletarTudo)
+btn_removeTodas.addEventListener('click', deletarTudo)
+//img_trash.addEventListener('click', deletarTudo)
 

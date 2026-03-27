@@ -1,6 +1,9 @@
+/*========== Google Fonts ==========*/
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
 :root {
+    --header-height: 3rem;
+    /*========== Cores ========== */
     --cor-branca: #ffffff;
     --cor-preta: #000000;
     --cor-primaria: #22c9a4;
@@ -8,7 +11,9 @@
     --cor-tercearia: #01F5BF;
     --cor-quarta: #3B7569;
     --cor-hover: #324B45;
-    --fonte-principal:"Open Sans", sans-serif;
+
+    /*========== Fontes e Tipografia==========*/
+    --fonte-principal:"Montserrat", sans-serif;
 
 }
 
@@ -17,6 +22,7 @@
 }
 
 body {
+    font-family: var(--fonte-principal);
     background-image: url(img/bgMobileFirst.jpg);
     background-repeat: no-repeat;
     display: flex;
@@ -24,6 +30,137 @@ body {
     justify-content: center;
     align-items: center;
     width: 100vw;
+    z-index: 100;
+}
+
+.header{
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: var(--cor-quarta);
+    box-shadow: 0 2px 16px hsla(220, 32%, 8%, .3);
+    height: var(--header-height);
+}
+
+/*========== Conteudo NAV ==========*/
+.container_nav {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Isso resolve o problema da imagem anterior! */
+    padding: 0 1.5rem;
+}
+
+.container_conteudoNav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+/* Estilização do Dropdown */
+.dropdown_container {
+    position: absolute;
+    top: 100%; /* Brota logo abaixo do header */
+    right: 1.5rem;
+    background-color: var(--cor-quarta);
+    width: 200px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    border-radius: 0 0 8px 8px;
+    
+    /* Estado inicial: Escondido */
+    display: none; 
+    z-index: 100;
+}
+
+/* Classe que o JS vai adicionar/remover */
+.show-dropdown {
+    display: block;
+}
+
+.dropdown_container-listaRemocao {
+    list-style: none;
+    padding: 0.5rem 0;
+}
+
+.dropdown_btnRemoveTarefa {
+    width: 100%;
+    padding: 12px 16px;
+    background: none;
+    border: none;
+    color: var(--cor-branca);
+    text-align: left;
+    cursor: pointer;
+    font-family: var(--fonte-principal);
+}
+
+.dropdown_btnRemoveTarefa:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav_logo,
+.nav_burger,
+.nav_close {
+    color: var(--cor-branca);
+}
+
+.nav_logo {
+    display: inline-flex;
+    align-items: center;
+    column-gap: .25rem;
+
+}
+
+.nav_logo i {
+    font-weight: initial;
+    font-size: 1.25rem;
+}
+
+.nav_toogle {
+    position: relative;
+    width: 32px;
+    height: 32px;
+}
+
+.nav_close{
+    opacity: 0;
+    pointer-events: none;
+}
+
+.show-menu .nav_burger {
+    opacity: 0;
+    transform: rotate(90deg);
+}
+
+.show-menu .nav_close {
+    opacity: 1;
+    transform: rotate(90deg);
+    pointer-events: auto;
+}
+
+.nav_burger,
+.nav_close{
+    position: absolute;
+    width: max-content;
+    height: max-content;
+    inset: 0;
+    margin: auto;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: opacity .1s, transform .4s;
+}
+
+.main {
+    margin-top: 2rem;
+}
+
+a {
+    text-decoration: none;
+    font-family: var(--fonte-principal);
 }
 
 .container_tarefa {
@@ -98,7 +235,7 @@ body {
     height: 80vh;
     display: flex;
     justify-content: center;
-    margin-top: 10vh;
+    margin-top: 5vh;
 }
 
 .linha_lista-tarefa{

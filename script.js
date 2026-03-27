@@ -5,9 +5,8 @@ const listaCompleta = document.querySelector('.coluna_lista-tarefa');
 const txt_listaTarefa = document.querySelector('.txt_lista-tarefa');
 
 let minhaLista = []
-
-function adicionarNovaTarefa() {
     //Adiciona a nova tarefa
+function adicionarNovaTarefa() {
    // minhaLista.push(formAdcTarefa.value)
 
    // aqui ele cria uma tarefa e também seleciona um status adicionando as chaves após o push.
@@ -19,19 +18,20 @@ function adicionarNovaTarefa() {
     mostrarTarefa()
 }
 
-function deletarItem(posicao){
-    //splice permite que eu delete qualquer coisa dentro do array com 2 parametros. qual posição, e quantos itens a partir da posição selecionada
-    minhaLista.splice(posicao, 1)
-    //Depois de deletar, ele precisa chamar o mostrar tarefa para mostrar novamente os itens que ainda estavam na lista.
-    mostrarTarefa()
-    console.log(posicao)
-}
-
 function concluirTarefa(posicao){
     minhaLista[posicao].concluida = !minhaLista[posicao].concluida
 
     mostrarTarefa();
 }
+
+function deletarItem(posicao){
+    //splice permite que eu delete qualquer coisa dentro do array com 2 parametros. qual posição, e quantos itens a partir da posição selecionada
+    minhaLista.splice(posicao, 1)
+    //Depois de deletar, ele precisa chamar o mostrar tarefa para mostrar novamente os itens que ainda estavam na lista.
+    mostrarTarefa()
+}
+
+
 
 function mostrarTarefa() {
     // Adiciona uma nova linha dentro da lista
@@ -51,9 +51,22 @@ function mostrarTarefa() {
 
     listaCompleta.innerHTML = novaLi
 
+    localStorage.setItem('lista', JSON.stringify(minhaLista))
 
     /**/
 }
 
+function recarregarTarefas(){
+    // captura o item dentro do local storage, passando o nome da lista para procurar.
+    const tarefaDoLocalStorage = localStorage.getItem('lista')
+
+    if(tarefaDoLocalStorage){
+    //minha lista recebe os valores convertidos novamente com o .parse .
+        minhaLista = JSON.parse(tarefaDoLocalStorage)
+        console.log(tarefaDoLocalStorage)
+    }    
+}
+
+recarregarTarefas()
 btnAdcTarefa.addEventListener('click', adicionarNovaTarefa);
 

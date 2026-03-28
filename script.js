@@ -10,7 +10,6 @@ const txt_listaTarefa = document.querySelector('.txt_lista-tarefa')
 const navToggle = document.querySelector('.nav_toogle')
 const dropdown = document.querySelector('.dropdown_container')
 const burger = document.querySelector('.nav_burger')
-const close = document.querySelector('.nav_close')
 //declaração da lista variavel
 let minhaLista = []
 
@@ -66,14 +65,20 @@ function deletarItem(posicao){
 }
 
 function deletarConcluida(posicao){
-    
+    minhaLista = minhaLista.filter(item => !item.concluida)
+    mostrarTarefa()
 }
+
+
+btn_removeCompleto.addEventListener('click', deletarConcluida)
+
 
 function deletarTudo (posicao){
     // Aqui ele adiciona uma lista com o valor zerado a minha lista.
     minhaLista = []
     mostrarTarefa()
 }
+
     /* Sempre que executar alguma adição ou deletar tem que exibir a função mostrar tarefa 
     pois ela sempre irá sobreescrever com o novo resultado o que for pedido.*/
 function mostrarTarefa() {
@@ -95,7 +100,6 @@ function mostrarTarefa() {
     }else{
         console.error("A lista está vazia")
     }
-    
     //A lista irá receber o valor passado pelo usuario 
     listaCompleta.innerHTML = novaLi
     // O local storage vai converter o item para string para poder ser incluido na lista
@@ -103,6 +107,7 @@ function mostrarTarefa() {
     // Após as estapas acima, vai incluir um campo vazio para o usuário inserir uma nova tarefa
     formAdcTarefa.value = ''
 }
+
 
 function recarregarTarefas(){
     // captura o item dentro do local storage, passando o nome da lista para procurar.
@@ -112,7 +117,9 @@ function recarregarTarefas(){
     //minha lista recebe os valores convertidos novamente com o .parse .
         minhaLista = JSON.parse(tarefaDoLocalStorage)
         //console.log(tarefaDoLocalStorage)
-    }    
+    }
+
+    mostrarTarefa()
 }
 
 recarregarTarefas()
@@ -120,4 +127,5 @@ recarregarTarefas()
 btnAdcTarefa.addEventListener('click', adicionarNovaTarefa)
 btn_removeTodas.addEventListener('click', deletarTudo)
 //img_trash.addEventListener('click', deletarTudo)
+recarregarTarefas()
 

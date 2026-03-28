@@ -11,6 +11,7 @@
     --cor-tercearia: #01F5BF;
     --cor-quarta: #3B7569;
     --cor-hover: #324B45;
+    --cor-concluida-bg: rgba(255, 255, 255, 0.15);
 
     /*========== Fontes e Tipografia==========*/
     --fonte-principal:"Montserrat", sans-serif;
@@ -39,7 +40,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    background: var(--cor-quarta);
+    background: var(--cor-secundaria);
     box-shadow: 0 2px 16px hsla(220, 32%, 8%, .3);
     height: var(--header-height);
 }
@@ -103,8 +104,7 @@ body {
 }
 
 .nav_logo,
-.nav_burger,
-.nav_close {
+.nav_burger{
     color: var(--cor-branca);
 }
 
@@ -126,24 +126,18 @@ body {
     height: 32px;
 }
 
-.nav_close{
-    opacity: 0;
-    pointer-events: none;
-}
-
 .show-menu .nav_burger {
     opacity: 0;
     transform: rotate(90deg);
 }
 
-.show-menu .nav_close {
+.show-menu{
     opacity: 1;
     transform: rotate(90deg);
     pointer-events: auto;
 }
 
-.nav_burger,
-.nav_close{
+.nav_burger{
     position: absolute;
     width: max-content;
     height: max-content;
@@ -151,7 +145,16 @@ body {
     margin: auto;
     font-size: 1.25rem;
     cursor: pointer;
-    transition: opacity .1s, transform .4s;
+    transition: ease-in-out .1s, transform .4s;
+}
+
+.nav_burger:hover {
+    transform: scale(1.05);
+}
+
+.nav_burger:active {
+    background: var(--cor-hover);
+    transform: scale(0.95);
 }
 
 .main {
@@ -166,6 +169,7 @@ a {
 .container_tarefa {
     display: flex;
     justify-content: center;
+    margin-top: 25px;
 }
 
 .container_conteudo-tarefa{
@@ -182,14 +186,16 @@ a {
 }
 
 .input_adcTarefa{
+    background: rgba(255, 255, 255, 0.7);
     width: 45vw;
-    padding: 13px;
-    border-radius: 20px;
+    padding: 12px 20px;
+    border-radius: 50px;
     border: none;
     outline: none;
-    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.08);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
     -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.08);
     -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.08);
+    font-family: var(--fonte-principal);
 }
 
 .btn_adcTarefa {
@@ -211,24 +217,8 @@ a {
 .btn_adcTarefa:active {
     background: var(--cor-hover);
     transform: scale(0.95);
-    
 }
-
-.img_trash {
-    height: 45px;
-    margin-left: 20px;
-    filter: drop-shadow(10px 10px 5px rgba(0,0,0,0.25));
-    -webkit-filter: drop-shadow 10px 10px 5px  rgba(0,0,0,0.32);
-    -moz-filter: drop-shadow 10px 10px 5px  rgba(0,0,0,0.32);
-}
-
-.img_trash:hover {
-    transform: scale(1.05);
-}
-
-.img_trash:active {
-    transform: scale(0.95);
-}
+/*========== EDIÇÃO DO CONTAINER QUE RECEBE A LISTA ==========*/
 
 .container_lista-tarefa {
     width: 100vw;
@@ -238,34 +228,62 @@ a {
     margin-top: 5vh;
 }
 
+
+/*========== EDIÇÃO DA LINHA TAREFA ==========*/
 .linha_lista-tarefa{
+    /*Flexbox*/
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+    box-sizing: border-box;
+    /*Resoloução*/
     gap: 4px;
     width: 80vw;
     height: 6vh;
-    background-color: var(--cor-branca);
+    padding: 15px;
+    margin-bottom: 15px;
     border:none ;
     border-radius: 20px;
-    margin-bottom: 15px;
+    /*Cor e sombra*/
+    transition: transform 0.2s ease;
+    background: rgba(255, 255, 255, 0.4);
     box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.08);
     -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.08);
     -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.08);
     cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.linha_lista-tarefa.done {
+    background: var(--cor-concluida-bg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transform: scale(0.98); /* Ela "encolhe" levemente para parecer desativada */
+    transition: all 0.3s ease;
+}
+
+.linha_lista-tarefa:hover {
+    transform: scale(1.02); /* Leve pulo ao passar o mouse */
+    background: rgba(255, 255, 255, 0.6);
 }
 
 .img_check, .img_edit{
     height: 25px;
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
+    visibility: hidden;
     pointer-events: none;
 }
 
 .linha_lista-tarefa:hover .img_check,
 .linha_lista-tarefa:hover .img_edit {
     opacity: 1;
+    visibility: visible;
     pointer-events: auto;
+}
+
+.linha_lista-tarefa.done .img_check{
+    visibility: hidden;
+    pointer-events: none;
 }
 
 .txt_lista {

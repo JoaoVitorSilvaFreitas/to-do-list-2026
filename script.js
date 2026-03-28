@@ -52,14 +52,26 @@ function adicionarNovaTarefa() {
 }
 
 function concluirTarefa(posicao){
+    const desejaApagar = confirm("Você terminou a tarefa, deseja apaga-la ?")
     minhaLista[posicao].concluida = !minhaLista[posicao].concluida
+    //mostrarTarefa()
+    //Verifica se o usuário quer apagar a tarefa concluida.
+    if(minhaLista[posicao].concluida === true){
+        
+        if(desejaApagar) {
+            minhaLista.splice(posicao, 1)
+        }
+    }
 
     mostrarTarefa()
 }
     //Deleta o item escolhido.
 function deletarItem(posicao){
+    const desejaApagar = confirm("Você terminou a tarefa, deseja apaga-la ?")
     //splice permite que eu delete qualquer coisa dentro do array com 2 parametros. qual posição, e quantos itens a partir da posição selecionada
-    minhaLista.splice(posicao, 1)
+    if(desejaApagar) {
+            minhaLista.splice(posicao, 1)
+        }
     //Depois de deletar, ele precisa chamar o mostrar tarefa para mostrar novamente os itens que ainda estavam na lista.
     mostrarTarefa()
 }
@@ -71,7 +83,6 @@ function deletarConcluida(posicao){
 
 
 btn_removeCompleto.addEventListener('click', deletarConcluida)
-
 
 function deletarTudo (posicao){
     // Aqui ele adiciona uma lista com o valor zerado a minha lista.
@@ -126,6 +137,5 @@ recarregarTarefas()
 
 btnAdcTarefa.addEventListener('click', adicionarNovaTarefa)
 btn_removeTodas.addEventListener('click', deletarTudo)
-//img_trash.addEventListener('click', deletarTudo)
 recarregarTarefas()
 

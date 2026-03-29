@@ -53,6 +53,7 @@ function adicionarNovaTarefa() {
 
 function concluirTarefa(posicao){
     const desejaApagar = confirm("Você terminou a tarefa, deseja apaga-la ?")
+    const estavaConcluida = minhaLista[posicao].concluida
     minhaLista[posicao].concluida = !minhaLista[posicao].concluida
     //mostrarTarefa()
     //Verifica se o usuário quer apagar a tarefa concluida.
@@ -67,13 +68,25 @@ function concluirTarefa(posicao){
 }
     //Deleta o item escolhido.
 function deletarItem(posicao){
+    const todosOsLIs = document.querySelectorAll('.linha_lista-tarefa')
+    const liParaAnimar = todosOsLIs[posicao]
     const desejaApagar = confirm("Você terminou a tarefa, deseja apaga-la ?")
+
+    if (!liParaAnimar) return;
+    //adiciona a classe do css para dar o efeito
+    liParaAnimar.classList.add('animacao-saida')
+
+    liParaAnimar.addEventListener('animationend', () => {
     //splice permite que eu delete qualquer coisa dentro do array com 2 parametros. qual posição, e quantos itens a partir da posição selecionada
-    if(desejaApagar) {
+        if(desejaApagar) {
             minhaLista.splice(posicao, 1)
+        }else{
+            
         }
+
     //Depois de deletar, ele precisa chamar o mostrar tarefa para mostrar novamente os itens que ainda estavam na lista.
     mostrarTarefa()
+    }, {once: true})
 }
 
 function deletarConcluida(posicao){
@@ -95,14 +108,18 @@ function deletarTudo (posicao){
 function mostrarTarefa() {
     // Adiciona uma nova linha dentro da lista
     let novaLi = ''
+
+    const ultimoIndice = minhaLista.length -1;
     //o forEach percorre todos os itens do array
     //item também é conhecido como index. serve para localizar a posição do item dentro do vetor
     if(Array.isArray(minhaLista) && minhaLista.length >= 0){
         minhaLista.forEach((item, posicao) => {
+        
+        const classeAnimacao = (posicao === ultimoIndice && !item.concluida) ? 'animacao-entrada' : '';
 
         novaLi = novaLi + `
-        <li class="linha_lista-tarefa ${item.concluida && "done"}">
-        <img class="img_check" src="./img/checked.png" alt="finalizar tarefa" onclick="concluirTarefa(${posicao})">
+        <li class="linha_lista-tarefa ${item.concluida ? "done" : ""} ${classeAnimacao}">
+        <img class="img_check" src="${item.concluida ? './img/checked.png' : './img/checked.png' }" alt="finalizar tarefa" onclick="concluirTarefa(${posicao})">
         <p class="txt_lista">${item.tarefa}</p>
         <img class="img_edit" src="/img/edit.png" alt="editar tarefa" onclick="deletarItem(${posicao})">
         </li>

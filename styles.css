@@ -11,7 +11,7 @@
     --cor-tercearia: #01F5BF;
     --cor-quarta: #3B7569;
     --cor-hover: #324B45;
-    --cor-concluida-bg: rgba(255, 255, 255, 0.15);
+    --cor-concluida-bg: rgba(105, 255, 130, 0.534);
 
     /*========== Fontes e Tipografia==========*/
     --fonte-principal:"Montserrat", sans-serif;
@@ -32,6 +32,15 @@ body {
     align-items: center;
     width: 100vw;
     z-index: 100;
+}
+
+.main {
+    margin-top: 2rem;
+}
+
+a {
+    text-decoration: none;
+    font-family: var(--fonte-principal);
 }
 
 .header{
@@ -143,9 +152,9 @@ body {
     height: max-content;
     inset: 0;
     margin: auto;
-    font-size: 1.25rem;
+    font-size: 1.75rem;
     cursor: pointer;
-    transition: ease-in-out .1s, transform .4s;
+    transition: opacity .1s, transform .4s;
 }
 
 .nav_burger:hover {
@@ -157,15 +166,7 @@ body {
     transform: scale(0.95);
 }
 
-.main {
-    margin-top: 2rem;
-}
-
-a {
-    text-decoration: none;
-    font-family: var(--fonte-principal);
-}
-
+/*========== EDIÇÃO DO CONTAINER QUE RECEBE O INPUT ==========*/
 .container_tarefa {
     display: flex;
     justify-content: center;
@@ -286,10 +287,22 @@ a {
     pointer-events: none;
 }
 
+.linha_lista-tarefa.done .txt_lista::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    height: 2px;
+    background-color: var(--cor-concluida-texto);
+    animation: riscarTexto 0.3s ease-out forwards;
+}
+
 .txt_lista {
     font-family: var(--fonte-principal);
     font-size: 1em;
     color: var(--cor-hover);
+    position: relative;
+    transform: color 0.3s ease;
 }
 
 .done {
@@ -297,14 +310,54 @@ a {
     text-decoration: line-through;
 }
 
+/*========= ANIMAÇÃO DA LINHA DE TAREFA ==========*/
 
-@media (min-width:720px) and (max-width:1024px){
-    body {
-        background-image: url(img/bgTablet.jpg);
+@keyframes entradaTarefa{
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
     }
 }
 
-@media (min-width:1440px){
+@keyframes saidaTarefa {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.5) translateY(-30px);
+    }
+}
+
+@keyframes riscarTexto {
+    from { width:  0;}
+    to { width: 100%;}
+}
+
+.animacao-entrada {
+    animation: entradaTarefa 0.4s ease-out forwards;
+}
+
+.animacao-saida {
+    animation: saidaTarefa 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    pointer-events: none;
+    position: relative;
+    z-index: 10;
+}
+
+/*========== RESPONSIVIDADE ==========*/
+@media (min-width:540px) and (max-width:1024px){
+    body {
+        background-image: url(img/bgTabletNovo.jpg);
+    }
+}
+
+@media (min-width:1024px){
     body {
         background-image: url(img/nuvensBG.png);
     }
